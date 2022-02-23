@@ -1,23 +1,22 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(lab1_priority_queue)
+project(priority_queue_BENCHMARK)
 
-set(MAIN_TEST main.cpp test.h testing_main_func_priority_queue.h)
+set(MAIN_BENCHMARK_TEST benchmark_priority_queue.cpp benchmark_priority_queue.h)
 
-include(FetchContent)
 FetchContent_Declare(
-        googletest
-        GIT_REPOSITORY https://github.com/google/googletest.git
-        GIT_TAG        e2239ee6043f73722e7aa812a459f54a28552929 # release-1.10.0
+        googleBenchmark
+        GIT_REPOSITORY https://github.com/google/benchmark.git
+        GIT_TAG v1.6.1        # release-1.10.0
 )
 
+set(benchmark_force_shared_crt ON CACHE BOOL "" FORCE)
 
-#set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(googletest)
+FetchContent_MakeAvailable(GoogleBenchmark)
 
 enable_testing()
 
-add_executable(${PROJECT_NAME} ${MAIN_TEST})
+add_executable(${PROJECT_NAME} ${MAIN_BENCHMARK_TEST})
 
 set_target_properties(
         ${PROJECT_NAME} PROPERTIES
@@ -33,12 +32,13 @@ target_include_directories(
 
 target_link_libraries(
         ${PROJECT_NAME}
-        gtest_main
+        benchmark_main
+        benchmark
+        pthread
+
 )
 
-include(GoogleTest)
-gtest_discover_tests(${PROJECT_NAME}
-        XML_OUTPUT_DIR test_res)
+#include(GoogleBenchmark)
 
 if(MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE
@@ -50,4 +50,3 @@ else()
             )
 endif()
 
-#install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)

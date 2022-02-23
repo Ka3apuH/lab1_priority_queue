@@ -1,29 +1,38 @@
 #include <iostream>
 
-#include "priority_queue.hpp"
-#include <queue>
+#include "priority_queue.h"
+#include "gtest/gtest.h"
+#include <random>
+
+#include "test.h"
+#include "testing_main_func_priority_queue.h"
+
+
 using namespace h_work;
 using namespace std;
 
-int main() {
 
-    h_work::priority_queue<string> a;
-    cout << a.empty();
-    vector<int> aaa {1,1,1,1,1,1,1};
-    aaa.push_back(3);
-    //for (auto i=aaa.end()-1; i>=aaa.begin() ; --i) {
-   //     cout << *(i) << endl;
-    //}
+TEST_F(Testing_main_func_priority_queue,add_element){
 
-    std::priority_queue<int> aa;
+    //cout<<"rand";
 
+    unsigned int sizeOfHeap=randomDevice()%103;
 
-
-    swap(*((aaa.end()-1)),*(aaa.begin()+ (distance(aaa.begin(),aaa.end()-1)-1)/2));
-
-    for (auto i=aaa.begin(); i<aaa.end() ; ++i) {
-        cout << *(i) << endl;
+    for (unsigned int i = 0; i < sizeOfHeap; ++i) {
+        auto element=randomDevice();
+        test_heap.add_element(element);
+        real_heap.push(element);
     }
-    //cout << *(aaa.begin()+aaa.begin()-3) << endl;
-    return 0;
+
+    for (unsigned int i = 0; i < sizeOfHeap; ++i) {
+
+        ASSERT_EQ(test_heap.max_elem(),real_heap.top());
+        test_heap.pop();
+        real_heap.pop();
+    }
 }
+
+TEST_F(Test_priority_queue , Priority_queue_test_1) {
+
+}
+
