@@ -1,48 +1,49 @@
 
-###Задача:
+### Задача:
 реализовать контейнер-адаптер `priority_queue`. Принцип работы очереди:
 первым извлекается наибольший элемент. Контейнер должен
 обеспечивать логарифмическое время работы для добавления и удаления элемента.
 
-###реализуемый класс очереди:
+### Реализуемый класс очереди:
 [`priority_queue`](priority_queue/priority_queue.h) находится в
 <pre>$PROJECT_DIR$/priority_queue/priority_queue.h</pre>
 
-###тестирование класса:
+### Тестирование класса:
 тестирование данного класса : [`lab1_priority_queue_TEST`](test/priority_queue_TEST.cpp) находится в
 <pre> $PROJECT_DIR$/test/priority_queue_TEST.cpp </pre>
 
 Для запуска тестирования данного класса неоходимо выполнить следующее:
 
-####собрать проект
+#### Cобрать проект
 ```bash
 $ mkdir build
 $ cd build/
 $ cmake ..
 $ make 
 ```
-####запустить тестирование
+#### Запустить тестирование
 ```bash
 ./test/lab1_priority_queue_TEST
 ```
-![alt text](images/Снимок%20экрана%20от%202022-02-24%2005-40-34.png "Описание будет тут")
-###banchmark метода класса `add_element`:
+![alt text](images/Снимок%20экрана%20от%202022-02-24%2005-40-34.png "Выполнение тестирования")
 
-banchmark : [`lab1_priority_queue_BENCHMARK`](Benchmark/benchmark_priority_queue.cpp) находится в
+### Benchmark метода класса `add_element`:
+
+benchmark : [`lab1_priority_queue_BENCHMARK`](Benchmark/benchmark_priority_queue.cpp) находится в
 <pre> $PROJECT_DIR$/Benchmark/benchmark_priority_queue.cpp </pre>
 
-Для запуска banchmark метода данного класса неоходимо выполнить следующее:
+Для запуска benchmark метода данного класса неоходимо выполнить следующее:
 
-####собрать проект
+#### Собрать проект
 ```bash
 $...
 ```
-####запустить banchmark
+#### Запустить benchmark
 ```bash
 ./Benchmark/lab1_priority_queue_BENCHMARK
 ```
 
-![alt text](images/Снимок%20экрана%20от%202022-02-24%2005-47-46.png "Описание будет тут")
+![alt text](images/Снимок%20экрана%20от%202022-02-24%2005-47-46.png "Benchmark ")
 Как можно заметить на данном скрине добавление элемента очень сильно приближенно к сложности 
 
 `O(ln N)`
