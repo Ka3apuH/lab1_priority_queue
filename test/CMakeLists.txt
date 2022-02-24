@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.5)
 
 project(lab1_priority_queue_TEST)
 
-set(MAIN_TEST main.cpp testing_main_func_priority_queue.h)
+set(MAIN_TEST priority_queue_TEST.cpp testing_main_func_priority_queue.h)
 
 include(FetchContent)
 FetchContent_Declare(
