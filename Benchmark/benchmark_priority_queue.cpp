@@ -37,16 +37,19 @@ BENCHMARK_DEFINE_F(benchmark_priority_queue_fix,BM_priority_queue_sort_elements)
 BENCHMARK_REGISTER_F(benchmark_priority_queue_fix, BM_priority_queue_add_elements)
 ->RangeMultiplier(2)
 ->Range(8, 8<<8)
+        ->Iterations(1)
 ->Complexity(benchmark::oAuto);
 
 BENCHMARK_REGISTER_F(benchmark_priority_queue_fix, BM_priority_queue_del_elements)
 ->RangeMultiplier(2)
 ->Range(8, 8<<8)
+        ->Iterations(1)
 ->Complexity(benchmark::oAuto);
 
 BENCHMARK_REGISTER_F(benchmark_priority_queue_fix, BM_priority_queue_sort_elements)
         ->RangeMultiplier(2)
         ->Range(8, 8<<8)
+        ->Iterations(1)
         ->Complexity(benchmark::oAuto);
 
 // Run the benchmark
