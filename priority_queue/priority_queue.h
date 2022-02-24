@@ -111,10 +111,12 @@ namespace h_work{
             this->mass_of_tree.clear();
         }
 
-        void add_element(T new_element) {
+        bool add_element(T new_element) {
             this->mass_of_tree.push_back(new_element);
 
             this->move_up_elem(this->mass_of_tree.end() - 1);
+
+            return true;
         }
 
         bool delete_element(T element) {
@@ -129,7 +131,8 @@ namespace h_work{
         }
 
         void pop(){
-            this->delete_element(this->mass_of_tree.begin());
+            if(!this->empty())
+                this->delete_element(this->mass_of_tree.begin());
         }
     };
 }

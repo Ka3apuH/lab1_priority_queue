@@ -6,27 +6,51 @@
 
 #include "benchmark/benchmark.h"
 #include "priority_queue.h"
+#include "benchmark_priority_queue.h"
 
-void priority_queue_add_elements(size_t size_for){
-    std::random_device randomDevice;
-    h_work::priority_queue<unsigned int> pr_heap;
 
-    for (size_t i = 0; i <size_for ; ++i) {
-        pr_heap.add_element(randomDevice());
-    }
-}
-
-static void BM_priority_queue_add_elements(benchmark::State& state) {
-
+BENCHMARK_DEFINE_F(benchmark_priority_queue_fix,BM_priority_queue_add_elements) (benchmark::State& state) {
     for (auto _ : state) {
-        priority_queue_add_elements(state.range(0));
+        //asm volatile("" : "+m,r"(value) : : "memory");
+        pr_heap.add_element(randomDevice());
+        //benchmark::DoNotOptimize(pr_heap.add_element(randomDevice()));
     }
     state.SetComplexityN(state.range(0));
 }
 
-BENCHMARK(BM_priority_queue_add_elements)
-->RangeMultiplier(2)->Range(8<<10, 8<<15)->Complexity(benchmark::oLogN);
+BENCHMARK_DEFINE_F(benchmark_priority_queue_fix,BM_priority_queue_del_elements) (benchmark::State& state) {
+    for (auto _ : state) {
+        pr_heap.pop();
+    }
+    state.SetComplexityN(state.range(0));
+}
 
+BENCHMARK_DEFINE_F(benchmark_priority_queue_fix,BM_priority_queue_sort_elements) (benchmark::State& state) {
+    for (auto _ : state) {
+        for (int64_t i = 0; i <state.range(0) ; ++i) {
+            pr_heap.pop();
+        }
+    }
+    state.SetComplexityN(state.range(0));
+}
+
+BENCHMARK_REGISTER_F(benchmark_priority_queue_fix, BM_priority_queue_add_elements)
+->RangeMultiplier(2)
+->Range(8, 8<<8)
+->Complexity(benchmark::oAuto);
+
+BENCHMARK_REGISTER_F(benchmark_priority_queue_fix, BM_priority_queue_del_elements)
+->RangeMultiplier(2)
+->Range(8, 8<<8)
+->Complexity(benchmark::oAuto);
+
+BENCHMARK_REGISTER_F(benchmark_priority_queue_fix, BM_priority_queue_sort_elements)
+        ->RangeMultiplier(2)
+        ->Range(8, 8<<8)
+        ->Complexity(benchmark::oAuto);
 
 // Run the benchmark
 BENCHMARK_MAIN();
+
+
+
