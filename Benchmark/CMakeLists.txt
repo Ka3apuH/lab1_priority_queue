@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.5)
 
 project(lab1_priority_queue_BENCHMARK)
 
-set(MAIN_BENCHMARK_TEST benchmark_priority_queue.cpp)
+set(MAIN_BENCHMARK_TEST benchmark_priority_queue.cpp benchmark_priority_queue.h)
 
 include(FetchContent)
 
@@ -18,10 +18,13 @@ set(FETCHCONTENT_UPDATES_DISCONNECTED ON)
 
 add_executable(${PROJECT_NAME} ${MAIN_BENCHMARK_TEST})
 
+#set(BENCHMARK_FORMAT json)
+
 set_target_properties(
         ${PROJECT_NAME} PROPERTIES
         CXX_STANDARD 17
         CXX_STANDARD_REQUIRED ON
+        BENCHMARK_OUT_FORMAT json
 )
 
 target_include_directories(
