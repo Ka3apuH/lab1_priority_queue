@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(lab1_priority_queue)
+project(lab1_priority_queue_TEST)
 
-set(MAIN_TEST main.cpp test.h testing_main_func_priority_queue.h)
+set(MAIN_TEST main.cpp testing_main_func_priority_queue.h)
 
 include(FetchContent)
 FetchContent_Declare(
@@ -11,12 +11,11 @@ FetchContent_Declare(
         GIT_TAG        e2239ee6043f73722e7aa812a459f54a28552929 # release-1.10.0
 )
 
-
-#set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-enable_testing()
+set(FETCHCONTENT_UPDATES_DISCONNECTED ON)
 
+set(CMAKE_GTEST_)
 add_executable(${PROJECT_NAME} ${MAIN_TEST})
 
 set_target_properties(
@@ -37,8 +36,9 @@ target_link_libraries(
 )
 
 include(GoogleTest)
+
 gtest_discover_tests(${PROJECT_NAME}
-        XML_OUTPUT_DIR test_res)
+        XML_OUTPUT_DIR lab_1/Unit_test)
 
 if(MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE
@@ -50,4 +50,8 @@ else()
             )
 endif()
 
-#install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
+install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION ${CMAKE_HOME_DIRECTORY}/lab_1/Unit_test)
+install(FILES ${MAIN_TEST} DESTINATION ${CMAKE_HOME_DIRECTORY}/lab_1/Unit_test )
+
+#set(CPACK_GENERATOR "DEB")
+#include(CPack)

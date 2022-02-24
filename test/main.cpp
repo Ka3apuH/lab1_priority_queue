@@ -2,21 +2,19 @@
 
 #include "priority_queue.h"
 #include "gtest/gtest.h"
+
 #include <random>
 
-#include "test.h"
 #include "testing_main_func_priority_queue.h"
 
 
 using namespace h_work;
 using namespace std;
 
-
 TEST_F(Testing_main_func_priority_queue,add_element){
 
-    //cout<<"rand";
-
     unsigned int sizeOfHeap=randomDevice()%103;
+    //чтобы не было часто равно 0.... взял простое число
 
     for (unsigned int i = 0; i < sizeOfHeap; ++i) {
         auto element=randomDevice();
@@ -32,7 +30,4 @@ TEST_F(Testing_main_func_priority_queue,add_element){
     }
 }
 
-TEST_F(Test_priority_queue , Priority_queue_test_1) {
-
-}
 

@@ -7,6 +7,7 @@
 
 #include <gtest/gtest.h>
 #include "priority_queue.h"
+#include <queue>
 
 
 class Testing_main_func_priority_queue : public ::testing::Test {

@@ -1,20 +1,20 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(priority_queue_BENCHMARK)
+project(lab1_priority_queue_BENCHMARK)
 
-set(MAIN_BENCHMARK_TEST benchmark_priority_queue.cpp benchmark_priority_queue.h)
+set(MAIN_BENCHMARK_TEST benchmark_priority_queue.cpp)
+
+include(FetchContent)
 
 FetchContent_Declare(
-        googleBenchmark
+        googlebenchmark
         GIT_REPOSITORY https://github.com/google/benchmark.git
-        GIT_TAG v1.6.1        # release-1.10.0
+        GIT_TAG v1.6.1
 )
-
-set(benchmark_force_shared_crt ON CACHE BOOL "" FORCE)
 
 FetchContent_MakeAvailable(GoogleBenchmark)
 
-enable_testing()
+set(FETCHCONTENT_UPDATES_DISCONNECTED ON)
 
 add_executable(${PROJECT_NAME} ${MAIN_BENCHMARK_TEST})
 
@@ -34,11 +34,7 @@ target_link_libraries(
         ${PROJECT_NAME}
         benchmark_main
         benchmark
-        pthread
-
 )
-
-#include(GoogleBenchmark)
 
 if(MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE
@@ -49,4 +45,14 @@ else()
             -Werror -Wall -Wimplicit-fallthrough -pedantic-errors
             )
 endif()
+
+
+install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION ${CMAKE_HOME_DIRECTORY}/lab_1/benchmark)
+install(FILES ${MAIN_BENCHMARK_TEST} DESTINATION ${CMAKE_HOME_DIRECTORY}/lab_1/benchmark )
+
+#set(CPACK_GENERATOR "DEB")
+#include(CPack)
+
+
+
 

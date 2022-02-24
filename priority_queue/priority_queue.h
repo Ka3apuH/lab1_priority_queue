@@ -92,7 +92,7 @@ namespace h_work{
             return this->mass_of_tree.empty();
         }
 
-        priority_queue(std::vector<T> mass) : mass_of_tree(mass) {
+        explicit priority_queue(std::vector<T> mass) noexcept : mass_of_tree(mass) {
 
             for (auto i = this->mass_of_tree.end() - 1; i > this->mass_of_tree.begin(); --i) {
                 this->move_up_elem(i);
@@ -108,7 +108,7 @@ namespace h_work{
         }
 
         ~priority_queue() noexcept {
-            std::destroy(this->mass_of_tree.begin(), this->mass_of_tree.end());
+            this->mass_of_tree.clear();
         }
 
         void add_element(T new_element) {
